@@ -29,22 +29,25 @@ y_out = y;
 
     if !isVector(x)
         disp('Error : x not a vector');
-        y_out = 'FAILED';
+        alpha = 'FAILED';
         return 
     end
 
     if !isVector(y)
         disp('Error : y not a vector');
-        y_out = 'FAILED';
+        alpha = 'FAILED';
         return
     end
 
     if !isCompatible(x, y)
         disp('Error : x and y are not compatible');
-        y_out = 'FAILED';
+        alpha = 'FAILED';
         return
     end
 
-    alpha = 1;
+    alpha = 0;
+    for i = 1:max(size(x))
+        alpha += y(i) * x(i)
+    end
     
 endfunction
