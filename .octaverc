@@ -1,0 +1,2 @@
+warning('off', 'Octave:possible-matlab-short-circuit-operator');
+addpath(genpath ('/Users/jlengrand/IdeaProjects/LAFF-2.0xM/Programming/laff'))
