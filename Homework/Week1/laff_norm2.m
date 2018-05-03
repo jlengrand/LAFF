@@ -15,16 +15,10 @@
 
 ## Author: julien Lengrand-Lambert <jlengrand@juliens-MacBook-Pro.local>
 ## Created: 2018-05-03
-function [ alpha ] = laff_dot (x, y)
-
-y_out = y;
+function [ alpha ] = laff_norm2 (x)
 
     function isVector = isVector(x)
         isVector = (size(x, 1) == 1 || size(x, 2) == 1);
-    endfunction
-
-    function isCompatible = isCompatible(x, y)
-        isCompatible = (isequal(size(x), size(y)) || isequal(size(x), fliplr(size(y))));
     endfunction
 
     if !isVector(x)
@@ -33,21 +27,18 @@ y_out = y;
         return 
     end
 
-    if !isVector(y)
-        disp('Error : y not a vector');
-        alpha = 'FAILED';
-        return
+    xmax = 0.0
+    for i=1:size(x, 1)
+        if abs( x( i ) > xmax ) 
+            xmax = abs( x( i ) );
+        end
     end
 
-    if !isCompatible(x, y)
-        disp('Error : x and y are not compatible');
-        alpha = 'FAILED';
-        return
-    end
+    x = laff_scal( 1/xmax, x );
 
-    alpha = 0;
-    for i = 1:max(size(x))
-        alpha += y(i) * x(i);
-    end
+    % Use laff_dot to compute the length of x as sqrt( x' * x )
+    alpha = sqrt( laff_dot( x, x ) );
+
+    alpha *= xmax;
     
 endfunction

@@ -17,7 +17,7 @@ if ( m_x ~= 1 & n_x ~= 1 )
     return
 end
 
-xmax = 0.0
+xmax = 0.0;
 for i=1:m_x
     if abs( x( i ) > xmax ) 
         xmax = abs( x( i ) );
